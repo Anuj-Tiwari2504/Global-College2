@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { padding: 10px; margin: 5px; background: #007bff; color: white; border: none; cursor: pointer; }
+        .result { background: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Backend API Test</h1>
+    
+    <button onclick="testConnection()">Test Connection</button>
+    <button onclick="createTestUser()">Create Test User</button>
+    <button onclick="registerUser()">Register New User</button>
+    <button onclick="loginUser()">Login User</button>
+    
+    <div id="results"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:3002';
+        
+        function showResult(title, data) {
+            const results = document.getElementById('results');
+            results.innerHTML += `<div class="result"><h3>${title}</h3><pre>${JSON.stringify(data, null, 2)}</pre></div>`;
+        }
+        
+        async function testConnection() {
+            try {
+                const response = await fetch(`${API_BASE}/test`);
+                const data = await response.json();
+                showResult('Connection Test', data);
+            } catch (error) {
+                showResult('Connection Error', { error: error.message });
+            }
+        }
+        
+        async function createTestUser() {
+            try {
+                const response = await fetch(`${API_BASE}/test-user`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await response.json();
+                showResult('Test User Creation', data);
+            } catch (error) {
+                showResult('Test User Error', { error: error.message });
+            }
+        }
+        
+        async function registerUser() {
+            try {
+                const userData = {
+                    firstName: 'John',
+                    lastName: 'Doe',
+                    email: 'john.doe@example.com',
+                    phone: '9876543210',
+                    password: 'password123',
+                    course: 'cse'
+                };
+                
+                const response = await fetch(`${API_BASE}/api/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+                const data = await response.json();
+                showResult('User Registration', data);
+            } catch (error) {
+                showResult('Registration Error', { error: error.message });
+            }
+        }
+        
+        async function loginUser() {
+            try {
+                const loginData = {
+                    studentId: '1100001',
+                    password: 'password123'
+                };
+                
+                const response = await fetch(`${API_BASE}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(loginData)
+                });
+                const data = await response.json();
+                showResult('User Login', data);
+            } catch (error) {
+                showResult('Login Error', { error: error.message });
+            }
+        }
+    </script>
+</body>
+</html>

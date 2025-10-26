@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Global Institute</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top scrolled">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                <span>Global Institute</span>
+            </a>
+            <div class="ms-auto">
+                <a href="index.html" class="btn btn-outline-primary">← Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-body text-center p-4">
+                        <div class="profile-photo-container mb-3">
+                            <img src="null" alt="Profile" class="profile-photo" id="profilePhoto">
+                            <div class="photo-overlay">
+                                <i class="fas fa-camera"></i>
+                                <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                        <h4 id="profileName">John Doe</h4>
+                        <p class="text-muted" id="profileId">Student ID: 1124089</p>
+                        <p class="text-muted" id="profileCourse">Computer Science Engineering</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5><i class="fas fa-user me-2"></i>Profile Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="profileForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-control" id="dob">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Gender</label>
+                                    <select class="form-control" id="gender">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Address</label>
+                                <textarea class="form-control" id="address" rows="3"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Course</label>
+                                    <select class="form-control" id="course" required>
+                                        <option value="cse">Computer Science Engineering</option>
+                                        <option value="mech">Mechanical Engineering</option>
+                                        <option value="eee">Electrical Engineering</option>
+                                        <option value="civil">Civil Engineering</option>
+                                        <option value="mba">MBA</option>
+                                        <option value="science">Applied Sciences</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Year</label>
+                                    <select class="form-control" id="year">
+                                        <option value="1">1st Year</option>
+                                        <option value="2">2nd Year</option>
+                                        <option value="3">3rd Year</option>
+                                        <option value="4">4th Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
+                                <a href="fees.html" class="btn btn-success"><i class="fas fa-credit-card me-2"></i>Pay Fees</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Check authentication
+        if (!auth.isAuthenticated()) {
+            window.location.href = 'login.html';
+        }
+
+        const currentUser = auth.getCurrentUser();
+        
+        // Load profile data
+        function loadProfile() {
+            if (!currentUser) return;
+            
+            document.getElementById('profileName').textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+            document.getElementById('profileId').textContent = `Student ID: ${currentUser.studentId}`;
+            document.getElementById('profileCourse').textContent = getCourseFullName(currentUser.course);
+            
+            // Fill form fields
+            document.getElementById('firstName').value = currentUser.firstName || '';
+            document.getElementById('lastName').value = currentUser.lastName || '';
+            document.getElementById('email').value = currentUser.email || '';
+            document.getElementById('phone').value = currentUser.phone || '';
+            document.getElementById('course').value = currentUser.course || 'cse';
+            document.getElementById('dob').value = currentUser.dob || '';
+            document.getElementById('gender').value = currentUser.gender || '';
+            document.getElementById('address').value = currentUser.address || '';
+            document.getElementById('year').value = currentUser.year || '1';
+            
+            // Load profile photo
+            if (currentUser.profilePhoto) {
+                document.getElementById('profilePhoto').src = currentUser.profilePhoto;
+            }
+        }
+        
+        function getCourseFullName(courseCode) {
+            const courses = {
+                'cse': 'Computer Science Engineering',
+                'mech': 'Mechanical Engineering',
+                'eee': 'Electrical Engineering',
+                'civil': 'Civil Engineering',
+                'mba': 'MBA',
+                'science': 'Applied Sciences'
+            };
+            return courses[courseCode] || courseCode;
+        }
+
+        // Photo upload
+        document.querySelector('.profile-photo-container').addEventListener('click', function() {
+            document.getElementById('photoInput').click();
+        });
+
+        document.getElementById('photoInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Validate file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    showError('File size must be less than 5MB');
+                    return;
+                }
+                
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    showError('Please select a valid image file');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photoUrl = e.target.result;
+                    document.getElementById('profilePhoto').src = photoUrl;
+                    
+                    // Update in auth system
+                    try {
+                        auth.updateProfile({ profilePhoto: photoUrl });
+                        showSuccess('Profile photo updated successfully!');
+                    } catch (error) {
+                        showError('Failed to update profile photo');
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Update profile
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.dataset.originalText = submitBtn.innerHTML;
+            
+            // Get form data
+            const formData = {
+                firstName: document.getElementById('firstName').value.trim(),
+                lastName: document.getElementById('lastName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                course: document.getElementById('course').value,
+                dob: document.getElementById('dob').value,
+                gender: document.getElementById('gender').value,
+                address: document.getElementById('address').value.trim(),
+                year: document.getElementById('year').value
+            };
+            
+            // Validation
+            if (!formData.firstName) {
+                showError('Please enter your first name');
+                return;
+            }
+            
+            if (!formData.lastName) {
+                showError('Please enter your last name');
+                return;
+            }
+            
+            if (!validateEmail(formData.email)) {
+                showError('Please enter a valid email address');
+                return;
+            }
+            
+            if (!validatePhone(formData.phone)) {
+                showError('Please enter a valid 10-digit phone number');
+                return;
+            }
+            
+            setLoading(submitBtn, true);
+            
+            // Simulate network delay
+            setTimeout(() => {
+                try {
+                    auth.updateProfile(formData);
+                    showSuccess('Profile updated successfully!');
+                    loadProfile();
+                    setLoading(submitBtn, false);
+                } catch (error) {
+                    showError('Failed to update profile: ' + error.message);
+                    setLoading(submitBtn, false);
+                }
+            }, 1000);
+        });
+
+        // Initialize profile
+        loadProfile();
+    </script>
+</body>
+</html>

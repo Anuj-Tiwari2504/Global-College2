@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Institute of Education - Premier Educational Institution</title>
+    <meta name="description" content="Global Institute of Education - Leading educational institution offering quality courses with modern facilities and experienced faculty.">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">Global</span>
+                        <span class="logo-sub">Institute</span>
+                    </div>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faculty">Faculty</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#facilities">Labs & Facilities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#campus">Life @ Campus</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <!-- Auth Button (shown when not logged in) -->
+                    <li class="nav-item auth-buttons">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authModal">Sign Up</button>
+                    </li>
+                    <!-- Student Profile (shown when logged in) -->
+                    <li class="nav-item dropdown student-dropdown" style="display: none;">
+                        <div class="student-profile" data-bs-toggle="dropdown">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Student" class="profile-img" id="navProfileImg">
+                        </div>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><span class="dropdown-item-text"><strong id="studentId">Student ID: 1124089</strong></span></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>My Profile</a></li>
+                            <li><a class="dropdown-item" href="fees.html"><i class="fas fa-credit-card me-2"></i>Pay Fees</a></li>
+                            <li><a class="dropdown-item" href="support.html"><i class="fas fa-headset me-2"></i>Support</a></li>
+                            <li><a class="dropdown-item" href="forgot-password.html"><i class="fas fa-key me-2"></i>Forgot Password</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-8 mx-auto text-center text-white">
+                    <h1 class="display-4 fw-bold mb-4 fade-in">Welcome to Global Institute of Education</h1>
+                    <p class="lead mb-5 fade-in">Empowering minds, shaping futures through excellence in education and innovation</p>
+                    <div class="hero-buttons fade-in">
+                        <a href="#contact" class="btn btn-primary btn-lg me-3">Apply Now</a>
+                        <a href="#courses" class="btn btn-outline-light btn-lg">Explore Courses</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
+
+
+
+
+    <section class="hero-section" id="home">
+  <div class="hero-slides">
+    <!-- JS will populate slides here -->
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="container">
+    <div class="row align-items-center min-vh-100">
+      <div class="col-lg-8 mx-auto text-center text-white">
+        <h1 class="display-4 fw-bold mb-4">Welcome to Global Institute of Education</h1>
+        <p class="lead mb-5">Empowering minds, shaping futures through excellence in education and innovation</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary btn-lg me-3">Apply Now</a>
+          <a href="#courses" class="btn btn-outline-light btn-lg">Explore Courses</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- About Us -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <h2 class="section-title">About Global Institute</h2>
+                    <p class="text-muted mb-4">Established with a vision to provide world-class education, Global Institute of Education has been at the forefront of academic excellence for over two decades.</p>
+                    <p class="mb-4">Our mission is to nurture young minds and prepare them for the challenges of tomorrow through innovative teaching methodologies, state-of-the-art facilities, and industry-relevant curriculum.</p>
+                    <p>We believe in holistic development, combining academic rigor with practical skills, ensuring our graduates are well-equipped for successful careers.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="fact-card text-center p-4">
+                                <i class="fas fa-calendar-alt fa-3x text-primary mb-3"></i>
+                                <h4>Established</h4>
+                                <p class="text-muted">2001</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="fact-card text-center p-4">
+                                <i class="fas fa-certificate fa-3x text-primary mb-3"></i>
+                                <h4>AICTE Approved</h4>
+                                <p class="text-muted">Government Recognized</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="fact-card text-center p-4">
+                                <i class="fas fa-university fa-3x text-primary mb-3"></i>
+                                <h4>University Affiliated</h4>
+                                <p class="text-muted">State University</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="fact-card text-center p-4">
+                                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                                <h4>5000+</h4>
+                                <p class="text-muted">Alumni Network</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses -->
+    <section id="courses" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Courses</h2>
+                <p class="text-muted">Comprehensive programs designed for industry readiness</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4>Computer Science Engineering</h4>
+                        <p class="text-muted">4 Years • B.Tech</p>
+                        <p>Comprehensive program covering software development, AI, and emerging technologies.</p>
+                        <a href="courses/cse.html" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Mechanical Engineering</h4>
+                        <p class="text-muted">4 Years • B.Tech</p>
+                        <p>Focus on design, manufacturing, and mechanical systems with hands-on experience.</p>
+                        <a href="courses/mechanical.html" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Electrical Engineering</h4>
+                        <p class="text-muted">4 Years • B.Tech</p>
+                        <p>Power systems, electronics, and renewable energy technologies.</p>
+                        <a href="courses/electrical.html" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4>Civil Engineering</h4>
+                        <p class="text-muted">4 Years • B.Tech</p>
+                        <p>Infrastructure development, construction management, and sustainable design.</p>
+                        <a href="courses/civil.html" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Business Administration</h4>
+                        <p class="text-muted">2 Years • MBA</p>
+                        <p>Strategic management, leadership, and entrepreneurship skills.</p>
+                        <a href="courses/mba.html" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h4>Applied Sciences</h4>
+                        <p class="text-muted">3 Years • B.Sc</p>
+                        <p>Physics, Chemistry, Mathematics with research opportunities.</p>
+                        <a href="courses/science.html" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty -->
+    <section id="faculty" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Faculty</h2>
+                <p class="text-muted">Experienced educators and industry experts</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="faculty-card">
+                        <div class="faculty-image">
+                            <img src="" alt="Rohit Singh" loading="lazy">
+                        </div>
+                        <div class="faculty-info">
+                            <h5>Dr. Rohit Singh</h5>
+                            <p class="text-muted">Professor, Computer Science</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="faculty-card">
+                        <div class="faculty-image">
+                            <img src="" alt="Dr. Sanjay Mishra" loading="lazy">
+                        </div>
+                        <div class="faculty-info">
+                            <h5>Dr. Sanjay Mishra</h5>
+                            <p class="text-muted">Head, Mechanical Engineering</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="faculty-card">
+                        <div class="faculty-image">
+                            <img src="" alt="Prof. Ajay Sharma" loading="lazy">
+                        </div>
+                        <div class="faculty-info">
+                            <h5>Prof. Ajay Sharma</h5>
+                            <p class="text-muted">Associate Professor, Electrical</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="faculty-card">
+                        <div class="faculty-image">
+                            <img src="" alt="Dr. Lokesh Sharma" loading="lazy">
+                        </div>
+                        <div class="faculty-info">
+                            <h5>Dr. Lokesh Sharma</h5>
+                            <p class="text-muted">Dean, Business Studies</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Labs & Facilities -->
+    <section id="facilities" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Labs & Facilities</h2>
+                <p class="text-muted">State-of-the-art infrastructure for comprehensive learning</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card" data-bs-toggle="modal" data-bs-target="#facilityModal" data-facility="computer-lab">
+                        <img src="images/computer.png" alt="Computer Lab" loading="lazy">
+                        <div class="facility-overlay">
+                            <h5>Computer Lab</h5>
+                            <p>Advanced computing facilities with latest software</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card" data-bs-toggle="modal" data-bs-target="#facilityModal" data-facility="library">
+                        <img src="images/library.png" alt="Library" loading="lazy">
+                        <div class="facility-overlay">
+                            <h5>Central Library</h5>
+                            <p>Extensive collection of books and digital resources</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card" data-bs-toggle="modal" data-bs-target="#facilityModal" data-facility="hostel">
+                        <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=400&h=250&fit=crop" alt="Hostel" loading="lazy">
+                        <div class="facility-overlay">
+                            <h5>Student Hostel</h5>
+                            <p>Comfortable accommodation with modern amenities</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card" data-bs-toggle="modal" data-bs-target="#facilityModal" data-facility="sports">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop" alt="Sports Complex" loading="lazy">
+                        <div class="facility-overlay">
+                            <h5>Sports Complex</h5>
+                            <p>Multi-sport facilities for physical fitness</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card" data-bs-toggle="modal" data-bs-target="#facilityModal" data-facility="cafeteria">
+                        <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=400&h=250&fit=crop" alt="Cafeteria" loading="lazy">
+                        <div class="facility-overlay">
+                            <h5>Cafeteria</h5>
+                            <p>Hygienic food court with variety of cuisines</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card" data-bs-toggle="modal" data-bs-target="#facilityModal" data-facility="auditorium">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=250&fit=crop" alt="Auditorium" loading="lazy">
+                        <div class="facility-overlay">
+                            <h5>Auditorium</h5>
+                            <p>Modern auditorium for events and seminars</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Life @ Campus -->
+    <section id="campus" class="py-5">
+         <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Life @ Campus</h2>
+                <p class="text-muted">Vibrant campus life with diverse opportunities</p>
+            <!-- </div>  -->
+            
+            <!-- Campus Life Image Slider -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div id="campusLifeCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#campusLifeCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#campusLifeCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#campusLifeCarousel" data-bs-slide-to="2"></button>
+                            <button type="button" data-bs-target="#campusLifeCarousel" data-bs-slide-to="3"></button>
+                            <button type="button" data-bs-target="#campusLifeCarousel" data-bs-slide-to="4"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="campus-slide">
+                                    <img src="images/studye.png" alt="Students in Library" class="campus-img">
+                                    <div class="campus-overlay">
+                                        <h3>Study & Learning</h3>
+                                        <p>Modern library facilities and collaborative study spaces</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="campus-slide">
+                                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=600&fit=crop" alt="Students Collaborating" class="campus-img">
+                                    <div class="campus-overlay">
+                                        <h3>Team Projects</h3>
+                                        <p>Collaborative learning and group project environments</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="campus-slide">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=600&fit=crop" alt="Sports Activities" class="campus-img">
+                                    <div class="campus-overlay">
+                                        <h3>Sports & Fitness</h3>
+                                        <p>State-of-the-art sports facilities and fitness programs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="campus-slide">
+                                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop" alt="Cultural Events" class="campus-img">
+                                    <div class="campus-overlay">
+                                        <h3>Cultural Events</h3>
+                                        <p>Annual festivals, competitions, and cultural programs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="campus-slide">
+                                    <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=1200&h=600&fit=crop" alt="Campus Dining" class="campus-img">
+                                    <div class="campus-overlay">
+                                        <h3>Campus Dining</h3>
+                                        <p>Variety of dining options and social gathering spaces</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#campusLifeCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#campusLifeCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Testimonials -->
+            <!-- <div class="row mb-5">
+                <div class="col-12">
+                    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active"> -->
+                                <!-- <div class="testimonial-card text-center">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Student" class="testimonial-img">
+                                    <blockquote>"The faculty here is exceptional and the learning environment is truly inspiring."</blockquote>
+                                    <cite>- Alex Johnson, CSE Graduate</cite>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-card text-center">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face" alt="Student" class="testimonial-img">
+                                    <blockquote>"Great facilities and amazing campus life. Best decision of my academic journey."</blockquote>
+                                    <cite>- Maria Garcia, MBA Student</cite>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Campus Activities -->
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="activity-card">
+                        <i class="fas fa-theater-masks fa-3x text-primary mb-3"></i>
+                        <h5>Cultural Events</h5>
+                        <p>Annual festivals, competitions, and cultural programs</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="activity-card">
+                        <i class="fas fa-trophy fa-3x text-primary mb-3"></i>
+                        <h5>Sports Activities</h5>
+                        <p>Inter-college tournaments and the fitness programs</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="activity-card">
+                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                        <h5>Student Clubs</h5>
+                        <p>Technical societies, hobby clubs, and volunteer groups</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="text-muted">Get in touch with us for admissions and inquiries</p>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <div class="contact-item mb-4">
+                            <i class="fas fa-map-marker-alt text-primary me-3"></i>
+                            <div>
+                                <h6>Address</h6>
+                                <p>32A, Knowledge Park I, Greater Noida, Uttar Pradesh 201310, India</p>
+                            </div>
+                        </div>
+                        <div class="contact-item mb-4">
+                            <i class="fas fa-phone text-primary me-3"></i>
+                            <div>
+                                <h6>Phone</h6>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item mb-4">
+                            <i class="fas fa-envelope text-primary me-3"></i>
+                            <div>
+                                <h6>Email</h6>
+                                <p>info@globaleducation.edu</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-container mt-4">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.50041500000001!3d28.4679440!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cea77c04b23cb%3A0xe5b6deb316431543!2sGlobal%20Institute%20of%20Information%20Technology!5e0!3m2!1sen!2sin!4v1642678901234!5m2!1sen!2sin" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form class="contact-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control" placeholder="Subject" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5>Global Institute of Education</h5>
+                    <p class="text-white">Empowering minds, shaping futures through excellence in education and innovation.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#about" class="text-white">About Us</a></li>
+                        <li><a href="#courses" class="text-white">Courses</a></li>
+                        <li><a href="#faculty" class="text-white">Faculty</a></li>
+                        <li><a href="#contact" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h6>Courses</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Computer Science</a></li>
+                        <li><a href="#" class="text-white">Mechanical Engineering</a></li>
+                        <li><a href="#" class="text-white">Business Administration</a></li>
+                        <li><a href="#" class="text-white">Applied Sciences</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h6>Contact Info</h6>
+                    <p class="text-white mb-1"><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</p>
+                    <p class="text-white mb-1"><i class="fas fa-envelope me-2"></i>info@globaleducation.edu</p>
+                    <p class="text-white"><i class="fas fa-map-marker-alt me-2"></i>123 Education Street</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 Global Institute of Education. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-buttons">
+        <a href="tel:+15551234567" class="fab-btn fab-call" title="Call Us">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://wa.me/15551234567" class="fab-btn fab-whatsapp" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Course Modal -->
+    <div class="modal fade" id="courseModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="courseModalTitle">Course Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="courseModalBody">
+                    <!-- Course details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Facility Modal -->
+    <div class="modal fade" id="facilityModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="facilityModalTitle">Facility Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="facilityModalBody">
+                    <!-- Facility details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Join Global Institute</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center p-4">
+                    <i class="fas fa-graduation-cap fa-4x text-primary mb-4"></i>
+                    <h4 class="mb-3">Welcome to Global Institute</h4>
+                    <p class="text-muted mb-4">Choose an option to get started</p>
+                    <div class="d-grid gap-3">
+                        <a href="register.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>Create New Account
+                        </a>
+                        <a href="login.html" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-sign-in-alt me-2"></i>Already Have Account? Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Auth JS -->
+    <script src="js/auth.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script>
+        // Check login status and update UI
+        function updateNavbar() {
+            const authButtons = document.querySelector('.auth-buttons');
+            const studentDropdown = document.querySelector('.student-dropdown');
+            
+            if (auth.isAuthenticated()) {
+                const currentUser = auth.getCurrentUser();
+                
+                // Hide auth buttons, show profile dropdown
+                authButtons.style.display = 'none';
+                studentDropdown.style.display = 'block';
+                
+                // Update student info
+                document.getElementById('studentId').textContent = `Student ID: ${currentUser.studentId}`;
+                
+                // Update profile image
+                if (currentUser.profilePhoto) {
+                    document.getElementById('navProfileImg').src = currentUser.profilePhoto;
+                }
+                
+            } else {
+                // Show auth buttons, hide profile dropdown
+                authButtons.style.display = 'block';
+                studentDropdown.style.display = 'none';
+            }
+        }
+        
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                auth.logout();
+                updateNavbar();
+                
+                // Show logout message
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed';
+                alertDiv.style.cssText = 'top: 100px; right: 20px; z-index: 9999; min-width: 300px;';
+                alertDiv.innerHTML = `
+                    <strong>Logged out successfully!</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                document.body.appendChild(alertDiv);
+                
+                // Auto remove after 3 seconds
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.remove();
+                    }
+                }, 3000);
+            }
+        }
+        
+        // Update navbar on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavbar();
+            
+            // Update navbar when storage changes (for multiple tabs)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'currentUser' || e.key === 'isLoggedIn') {
+                    updateNavbar();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

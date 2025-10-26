@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Payment - Global Institute</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top scrolled">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                <span>Global Institute</span>
+            </a>
+            <div class="ms-auto">
+                <a href="profile.html" class="btn btn-outline-primary">← Back to Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-center mb-5">
+                    <i class="fas fa-credit-card fa-4x text-primary mb-3"></i>
+                    <h2>Fee Payment Portal</h2>
+                    <p class="text-muted">Pay your semester fees online</p>
+                </div>
+
+                <!-- Student Info Card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-user me-2"></i>Student Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Name:</strong> <span id="studentName">-</span></p>
+                                <p><strong>Student ID:</strong> <span id="studentId">-</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Course:</strong> <span id="studentCourse">-</span></p>
+                                <p><strong>Current Year:</strong> <span id="studentYear">-</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fee Structure -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list me-2"></i>Fee Structure</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Semester</th>
+                                        <th>Tuition Fee</th>
+                                        <th>Lab Fee</th>
+                                        <th>Library Fee</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="feeTable">
+                                    <!-- Fee rows will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment History -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-history me-2"></i>Payment History</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="paymentHistory">
+                            <p class="text-muted">No payments made yet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pay Semester Fee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <strong>Semester:</strong> <span id="paymentSemester"></span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Amount:</strong> ₹<span id="paymentAmount"></span>
+                    </div>
+                    
+                    <form id="paymentForm">
+                        <div class="mb-3">
+                            <label class="form-label">Payment Method</label>
+                            <select class="form-control" id="paymentMethod" required>
+                                <option value="">Select Payment Method</option>
+                                <option value="upi">UPI</option>
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="netbanking">Net Banking</option>
+                            </select>
+                        </div>
+                        
+                        <div id="upiDetails" style="display: none;">
+                            <div class="alert alert-info alert-sm mb-3">
+                                <i class="fas fa-mobile-alt me-2"></i>Pay securely using your UPI app
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">UPI ID</label>
+                                <input type="text" class="form-control" id="upiId" placeholder="yourname@paytm">
+                                <small class="text-muted">Enter your registered UPI ID</small>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">UPI PIN</label>
+                                <input type="password" class="form-control" id="upiPin" placeholder="Enter UPI PIN" maxlength="6">
+                                <small class="text-muted">4-6 digit UPI PIN</small>
+                            </div>
+                        </div>
+                        
+                        <div id="cardDetails" style="display: none;">
+                            <div class="alert alert-info alert-sm mb-3">
+                                <i class="fas fa-shield-alt me-2"></i>Your card details are encrypted and secure
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Card Number</label>
+                                    <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                                    <small class="text-muted">16-digit card number</small>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Expiry Date</label>
+                                    <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                                    <small class="text-muted">Month/Year format</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">CVV</label>
+                                    <input type="password" class="form-control" id="cardCvv" placeholder="123" maxlength="3">
+                                    <small class="text-muted">3-digit security code</small>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Cardholder Name</label>
+                                    <input type="text" class="form-control" id="cardName" placeholder="As on card">
+                                    <small class="text-muted">Name as printed on card</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="netbankingDetails" style="display: none;">
+                            <div class="alert alert-info alert-sm mb-3">
+                                <i class="fas fa-university me-2"></i>You will be redirected to your bank's secure portal
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Select Bank</label>
+                                <select class="form-control" id="bankName">
+                                    <option value="">Select Your Bank</option>
+                                    <option value="sbi">State Bank of India</option>
+                                    <option value="hdfc">HDFC Bank</option>
+                                    <option value="icici">ICICI Bank</option>
+                                    <option value="axis">Axis Bank</option>
+                                    <option value="pnb">Punjab National Bank</option>
+                                    <option value="bob">Bank of Baroda</option>
+                                    <option value="canara">Canara Bank</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Customer ID</label>
+                                <input type="text" class="form-control" id="customerId" placeholder="Enter Customer ID">
+                                <small class="text-muted">Your internet banking customer ID</small>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" onclick="processPayment()">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Check authentication
+        if (!auth.isAuthenticated()) {
+            window.location.href = 'login.html';
+        }
+
+        const currentUser = auth.getCurrentUser();
+        let currentPayment = null;
+
+        // Fee structure based on course
+        const feeStructure = {
+            'cse': { tuition: 45000, lab: 8000, library: 2000 },
+            'mech': { tuition: 42000, lab: 10000, library: 2000 },
+            'eee': { tuition: 40000, lab: 9000, library: 2000 },
+            'civil': { tuition: 38000, lab: 7000, library: 2000 },
+            'mba': { tuition: 60000, lab: 3000, library: 2000 },
+            'science': { tuition: 25000, lab: 5000, library: 2000 }
+        };
+
+        function loadStudentInfo() {
+            document.getElementById('studentName').textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+            document.getElementById('studentId').textContent = currentUser.studentId;
+            document.getElementById('studentCourse').textContent = getCourseFullName(currentUser.course);
+            document.getElementById('studentYear').textContent = `${currentUser.year || 1} Year`;
+        }
+
+        function getCourseFullName(courseCode) {
+            const courses = {
+                'cse': 'Computer Science Engineering',
+                'mech': 'Mechanical Engineering',
+                'eee': 'Electrical Engineering',
+                'civil': 'Civil Engineering',
+                'mba': 'MBA',
+                'science': 'Applied Sciences'
+            };
+            return courses[courseCode] || courseCode;
+        }
+
+        function loadFeeTable() {
+            const fees = feeStructure[currentUser.course] || feeStructure['cse'];
+            const totalSemesters = currentUser.course === 'mba' ? 4 : (currentUser.course === 'science' ? 6 : 8);
+            const payments = JSON.parse(localStorage.getItem('feePayments_' + currentUser.studentId)) || [];
+            
+            let tableHTML = '';
+            
+            for (let i = 1; i <= totalSemesters; i++) {
+                const total = fees.tuition + fees.lab + fees.library;
+                const payment = payments.find(p => p.semester === i);
+                const status = payment ? 'Paid' : 'Pending';
+                const statusClass = payment ? 'text-success' : 'text-danger';
+                const actionBtn = payment ? 
+                    `<span class="badge bg-success">Paid</span>` : 
+                    `<button class="btn btn-sm btn-primary" onclick="openPaymentModal(${i}, ${total})">Pay Now</button>`;
+                
+                tableHTML += `
+                    <tr>
+                        <td>Semester ${i}</td>
+                        <td>₹${fees.tuition.toLocaleString()}</td>
+                        <td>₹${fees.lab.toLocaleString()}</td>
+                        <td>₹${fees.library.toLocaleString()}</td>
+                        <td><strong>₹${total.toLocaleString()}</strong></td>
+                        <td><span class="${statusClass}">${status}</span></td>
+                        <td>${actionBtn}</td>
+                    </tr>
+                `;
+            }
+            
+            document.getElementById('feeTable').innerHTML = tableHTML;
+        }
+
+        function loadPaymentHistory() {
+            const payments = JSON.parse(localStorage.getItem('feePayments_' + currentUser.studentId)) || [];
+            
+            if (payments.length === 0) {
+                document.getElementById('paymentHistory').innerHTML = '<p class="text-muted">No payments made yet.</p>';
+                return;
+            }
+            
+            let historyHTML = '<div class="table-responsive"><table class="table table-sm"><thead><tr><th>Date</th><th>Semester</th><th>Amount</th><th>Method</th><th>Transaction ID</th></tr></thead><tbody>';
+            
+            payments.forEach(payment => {
+                historyHTML += `
+                    <tr>
+                        <td>${new Date(payment.date).toLocaleDateString()}</td>
+                        <td>Semester ${payment.semester}</td>
+                        <td>₹${payment.amount.toLocaleString()}</td>
+                        <td>${payment.method.toUpperCase()}</td>
+                        <td>${payment.transactionId}</td>
+                    </tr>
+                `;
+            });
+            
+            historyHTML += '</tbody></table></div>';
+            document.getElementById('paymentHistory').innerHTML = historyHTML;
+        }
+
+        function openPaymentModal(semester, amount) {
+            currentPayment = { semester, amount };
+            document.getElementById('paymentSemester').textContent = `Semester ${semester}`;
+            document.getElementById('paymentAmount').textContent = amount.toLocaleString();
+            
+            const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            modal.show();
+        }
+
+        // Payment method change handler
+        document.getElementById('paymentMethod').addEventListener('change', function() {
+            const method = this.value;
+            
+            // Hide all details
+            document.getElementById('upiDetails').style.display = 'none';
+            document.getElementById('cardDetails').style.display = 'none';
+            document.getElementById('netbankingDetails').style.display = 'none';
+            
+            // Show relevant details
+            if (method === 'upi') {
+                document.getElementById('upiDetails').style.display = 'block';
+            } else if (method === 'card') {
+                document.getElementById('cardDetails').style.display = 'block';
+            } else if (method === 'netbanking') {
+                document.getElementById('netbankingDetails').style.display = 'block';
+            }
+        });
+
+        // Card number formatting
+        document.getElementById('cardNumber').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            this.value = value;
+        });
+
+        // Card expiry formatting
+        document.getElementById('cardExpiry').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            this.value = value;
+        });
+
+        function processPayment() {
+            const method = document.getElementById('paymentMethod').value;
+            const payBtn = document.querySelector('.modal-footer .btn-success');
+            
+            if (!method) {
+                showError('Please select a payment method');
+                return;
+            }
+            
+            // Comprehensive validation
+            if (!validatePaymentDetails(method)) {
+                return;
+            }
+            
+            // Show loading state
+            payBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
+            payBtn.disabled = true;
+            
+            // Simulate real payment processing
+            setTimeout(() => {
+                const success = simulatePaymentGateway(method);
+                
+                if (success) {
+                    const paymentData = {
+                        semester: currentPayment.semester,
+                        amount: currentPayment.amount,
+                        method: method,
+                        date: new Date().toISOString(),
+                        transactionId: generateTransactionId(),
+                        studentId: currentUser.studentId,
+                        status: 'completed',
+                        gateway: getGatewayName(method)
+                    };
+                    
+                    // Save payment
+                    const payments = JSON.parse(localStorage.getItem('feePayments_' + currentUser.studentId)) || [];
+                    payments.push(paymentData);
+                    localStorage.setItem('feePayments_' + currentUser.studentId, JSON.stringify(payments));
+                    
+                    // Close modal and show success
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+                    modal.hide();
+                    
+                    showPaymentSuccess(paymentData);
+                    
+                    // Refresh tables
+                    loadFeeTable();
+                    loadPaymentHistory();
+                    
+                } else {
+                    showError('Payment failed. Please check your details and try again.');
+                }
+                
+                // Reset button
+                payBtn.innerHTML = 'Pay Now';
+                payBtn.disabled = false;
+                
+                // Reset form
+                document.getElementById('paymentForm').reset();
+                
+            }, 2000 + Math.random() * 2000); // Random delay 2-4 seconds
+        }
+        
+        function validatePaymentDetails(method) {
+            if (method === 'upi') {
+                const upiId = document.getElementById('upiId').value;
+                const upiPin = document.getElementById('upiPin').value;
+                
+                if (!upiId) {
+                    showError('Please enter UPI ID');
+                    return false;
+                }
+                if (!isValidUPI(upiId)) {
+                    showError('Please enter a valid UPI ID (e.g., name@paytm)');
+                    return false;
+                }
+                if (!upiPin || upiPin.length < 4) {
+                    showError('Please enter a valid UPI PIN (4-6 digits)');
+                    return false;
+                }
+            }
+            
+            if (method === 'card') {
+                const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+                const expiry = document.getElementById('cardExpiry').value;
+                const cvv = document.getElementById('cardCvv').value;
+                const name = document.getElementById('cardName').value;
+                
+                if (!cardNumber || !expiry || !cvv || !name) {
+                    showError('Please fill all card details');
+                    return false;
+                }
+                
+                if (!isValidCardNumber(cardNumber)) {
+                    showError('Please enter a valid card number');
+                    return false;
+                }
+                
+                if (!isValidExpiry(expiry)) {
+                    showError('Please enter a valid expiry date');
+                    return false;
+                }
+                
+                if (cvv.length !== 3) {
+                    showError('Please enter a valid 3-digit CVV');
+                    return false;
+                }
+            }
+            
+            if (method === 'netbanking') {
+                const bankName = document.getElementById('bankName').value;
+                const customerId = document.getElementById('customerId').value;
+                
+                if (!bankName) {
+                    showError('Please select a bank');
+                    return false;
+                }
+                if (!customerId) {
+                    showError('Please enter your Customer ID');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+        
+        function isValidUPI(upiId) {
+            const upiRegex = /^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}$/;
+            return upiRegex.test(upiId);
+        }
+        
+        function isValidCardNumber(cardNumber) {
+            // Luhn algorithm for card validation
+            if (cardNumber.length < 13 || cardNumber.length > 19) return false;
+            
+            let sum = 0;
+            let isEven = false;
+            
+            for (let i = cardNumber.length - 1; i >= 0; i--) {
+                let digit = parseInt(cardNumber[i]);
+                
+                if (isEven) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                }
+                
+                sum += digit;
+                isEven = !isEven;
+            }
+            
+            return sum % 10 === 0;
+        }
+        
+        function isValidExpiry(expiry) {
+            const [month, year] = expiry.split('/');
+            if (!month || !year) return false;
+            
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear() % 100;
+            const currentMonth = currentDate.getMonth() + 1;
+            
+            const expMonth = parseInt(month);
+            const expYear = parseInt(year);
+            
+            if (expMonth < 1 || expMonth > 12) return false;
+            if (expYear < currentYear) return false;
+            if (expYear === currentYear && expMonth < currentMonth) return false;
+            
+            return true;
+        }
+        
+        function simulatePaymentGateway(method) {
+            // Simulate real payment gateway responses
+            const successRate = 0.95; // 95% success rate
+            return Math.random() < successRate;
+        }
+        
+        function generateTransactionId() {
+            const prefix = 'TXN';
+            const timestamp = Date.now();
+            const random = Math.floor(Math.random() * 10000);
+            return prefix + timestamp + random;
+        }
+        
+        function getGatewayName(method) {
+            const gateways = {
+                'upi': 'UPI Gateway',
+                'card': 'Card Payment Gateway',
+                'netbanking': 'Net Banking Gateway'
+            };
+            return gateways[method] || 'Payment Gateway';
+        }
+        
+        function showPaymentSuccess(paymentData) {
+            const successHTML = `
+                <div class="alert alert-success alert-dismissible fade show position-fixed" style="top: 100px; right: 20px; z-index: 9999; min-width: 400px;">
+                    <h5><i class="fas fa-check-circle me-2"></i>Payment Successful!</h5>
+                    <p class="mb-1"><strong>Transaction ID:</strong> ${paymentData.transactionId}</p>
+                    <p class="mb-1"><strong>Amount:</strong> ₹${paymentData.amount.toLocaleString()}</p>
+                    <p class="mb-0"><strong>Semester:</strong> ${paymentData.semester}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', successHTML);
+            
+            // Auto remove after 10 seconds
+            setTimeout(() => {
+                const alert = document.querySelector('.alert-success');
+                if (alert) alert.remove();
+            }, 10000);
+        }
+
+        // Initialize page
+        loadStudentInfo();
+        loadFeeTable();
+        loadPaymentHistory();
+    </script>
+</body>
+</html>
